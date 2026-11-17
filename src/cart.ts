@@ -6,7 +6,7 @@ const listeners: Array<() => void> = [];
 function load(): ProductCount[] {
   try {
     const saved = localStorage.getItem(KEY);
-    return saved ? JSON.parse(saved) : [] ;
+    return saved ? JSON.parse(saved) : [];
   } catch {
     return [];
   }
@@ -18,7 +18,7 @@ function commit() {
   localStorage.setItem(KEY, JSON.stringify(cart));
   listeners.forEach((fn) => fn());
 }
-
+//hi
 export const getCart = () => cart;
 export const onCartChange = (fn: () => void) => listeners.push(fn);
 export const totalCount = () => cart.reduce((sum, c) => sum + c.quantity, 0);
