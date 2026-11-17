@@ -6,7 +6,7 @@ const listeners: Array<() => void> = [];
 function load(): ProductCount[] {
   try {
     const saved = localStorage.getItem(KEY);
-    return saved ? JSON.parse(saved) : [];
+    return saved ? JSON.parse(saved) : [] ;
   } catch {
     return [];
   }
