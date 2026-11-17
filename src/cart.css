@@ -1,0 +1,144 @@
+/* Cart: drawer + full page. Uses the tokens from style.css only. */
+.no-scroll { overflow: hidden; }
+
+/* Drawer */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(3, 6, 14, 0.65);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 100;
+  width: min(26rem, 100%);
+  display: flex; flex-direction: column;
+  background: var(--bg-2);
+  border-left: 1px solid var(--line);
+  border-radius: var(--r) 0 0 var(--r);
+  box-shadow: -30px 0 80px -20px #000;
+  transform: translateX(105%); visibility: hidden;
+  transition: transform 0.45s var(--ease), visibility 0s 0.45s;
+}
+.drawer:focus { outline: 0; }
+.is-open .drawer-overlay { opacity: 1; pointer-events: auto; }
+.is-open .drawer {
+  transform: none; visibility: visible;
+  transition: transform 0.45s var(--ease), visibility 0s;
+}
+.drawer-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--s2); padding: var(--s3);
+  border-bottom: 1px solid var(--line);
+}
+.drawer-head h2 { font-size: 1.6rem; }
+.drawer-count { font: 0.8rem var(--f-mono); color: var(--lime); margin-top: 0.3rem; }
+.drawer-body { flex: 1; overflow-y: auto; padding: var(--s3); }
+.drawer-foot {
+  display: flex; flex-direction: column; gap: var(--s2);
+  padding: var(--s3); border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.drawer-foot[hidden] { display: none; }
+.sub-row { display: flex; justify-content: space-between; align-items: baseline; color: var(--muted); }
+.sub-val { font: 700 1.5rem var(--f-head); color: var(--lime); }
+.drawer-foot .btn-link {
+  align-self: center; background: none; border: 0;
+  border-bottom: 1.5px solid var(--lime); color: inherit; cursor: pointer;
+}
+
+/* Cart rows (drawer and page) */
+.cart-list { display: grid; gap: var(--s2); }
+.cart-item {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  grid-template-areas: "img info info" "img qty remove";
+  gap: 0.6rem var(--s2); align-items: center;
+  padding: var(--s2);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: border-color 0.3s;
+}
+.cart-item:hover { border-color: rgba(198, 255, 61, 0.4); }
+.cart-item img {
+  grid-area: img; width: 100%; aspect-ratio: 1; object-fit: contain;
+  padding: 0.3rem; background: radial-gradient(circle at 50% 40%, #fff, #e6eaf3);
+  border-radius: 10px;
+}
+.ci-info { grid-area: info; min-width: 0; }
+.ci-info h3 { font-size: 1rem; line-height: 1.25; }
+.ci-price { font: 700 1.05rem var(--f-head); margin-top: 0.2rem; }
+.ci-price small { font: 0.75rem var(--f-mono); color: var(--muted); margin-left: 0.4rem; }
+.qty {
+  grid-area: qty; justify-self: start;
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--line); border-radius: 999px;
+}
+.qty button {
+  width: 2.1rem; height: 2.1rem; background: none; border: 0;
+  border-radius: 50%; color: var(--text); font-size: 1.1rem; cursor: pointer;
+  transition: color 0.3s, background 0.3s;
+}
+.qty button:hover { color: var(--lime); background: var(--lime-dim); }
+.qty span { min-width: 1.6rem; text-align: center; font: 600 0.95rem var(--f-head); }
+.ci-remove {
+  grid-area: remove; justify-self: end;
+  display: grid; place-items: center; width: 2.1rem; height: 2.1rem;
+  background: none; border: 1px solid transparent; border-radius: 50%;
+  color: var(--muted); cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.ci-remove:hover { color: var(--lime); border-color: var(--line); }
+.ci-remove svg { width: 1.05rem; height: 1.05rem; }
+
+/* Empty state */
+.cart-empty { display: grid; justify-items: center; gap: 0.6rem; text-align: center; padding: var(--s4) var(--s2); }
+.cart-empty h3 { font-size: 1.4rem; margin-top: var(--s1); }
+.cart-empty p { color: var(--muted); max-width: 28ch; margin-bottom: var(--s2); }
+.empty-icon {
+  display: grid; place-items: center; width: 5rem; height: 5rem;
+  border-radius: 50%; background: var(--lime-dim); color: var(--lime);
+  box-shadow: 0 0 50px -10px rgba(198, 255, 61, 0.35);
+}
+.empty-icon svg { width: 2.2rem; height: 2.2rem; }
+
+/* Full cart page */
+.cart-page { max-width: 1200px; margin: 0 auto; padding: var(--s5) clamp(1rem, 5vw, 4rem) var(--s6); }
+.crumbs { display: flex; gap: 0.6rem; font: 0.8rem var(--f-mono); color: var(--muted); margin-bottom: var(--s3); }
+.crumbs a:hover { color: var(--lime); }
+.crumbs [aria-current] { color: var(--lime); }
+.cart-title { font-size: clamp(2.4rem, 6vw, 4.5rem); margin-bottom: var(--s4); }
+.cart-title small { font: 0.9rem var(--f-mono); color: var(--muted); letter-spacing: 0; margin-left: 0.8rem; }
+.cart-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--s4); align-items: start; }
+.cart-layout.is-empty { grid-template-columns: 1fr; }
+.cart-page .cart-item { grid-template-columns: 7rem 1fr auto; padding: var(--s3); }
+.cart-page .ci-info h3 { font-size: 1.2rem; }
+.cart-summary {
+  position: sticky; top: 6rem;
+  padding: var(--s4) var(--s3);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--r) var(--r) 56px var(--r);
+}
+.cart-summary[hidden] { display: none; }
+.cart-summary h2 { font-size: 1.6rem; margin-bottom: var(--s2); }
+.sum-row { display: flex; justify-content: space-between; padding: 0.6rem 0; color: var(--muted); }
+.sum-total {
+  border-top: 1px solid var(--line); margin: var(--s1) 0 var(--s3);
+  padding-top: var(--s2); color: var(--text);
+  font: 700 1.5rem var(--f-head);
+}
+.sum-total strong { color: var(--lime); }
+.cart-summary .btn { width: 100%; }
+.cart-summary .btn-link { display: inline-block; margin-top: var(--s3); }
+.sum-note { margin-top: var(--s2); font: 0.8rem var(--f-mono); color: var(--muted); }
+.sum-note[hidden] { display: none; }
+
+@media (max-width: 900px) {
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+}
+@media (max-width: 560px) {
+  .cart-page .cart-item { grid-template-columns: 4.5rem 1fr auto; padding: var(--s2); }
+  .cart-title small { display: block; margin: 0.4rem 0 0; }
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Cart — DEVORA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="/" aria-label="DEVORA home"
+        ><span class="logo-br">&lt;</span>DEVORA<span class="logo-br"
+          >/&gt;</span
+        ></a
+      >
+      <nav aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="/#home">Home</a></li>
+          <li><a href="/#shop">Shop</a></li>
+          <li><a href="/#collections">Collections</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a class="icon-btn bag" href="/cart.html" aria-label="Shopping bag">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 7h12l1 13H5L6 7Z" />
+            <path d="M9 7a3 3 0 0 1 6 0" />
+          </svg>
+          <span class="bag-count">0</span>
+        </a>
+        <a class="btn btn-ghost nav-cta" href="/#shop">Explore Collection</a>
+      </div>
+    </header>
+
+    <main class="cart-page">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span aria-current="page">Cart</span>
+      </nav>
+      <h1 class="cart-title">Your Cart<small id="page-count"></small></h1>
+
+      <div class="cart-layout" id="cart-layout">
+        <section id="cart-items" aria-label="Cart items"></section>
+
+        <aside
+          class="cart-summary"
+          id="cart-summary"
+          aria-labelledby="sum-title"
+        >
+          <h2 id="sum-title">Order summary</h2>
+          <div class="sum-row">
+            <span>Subtotal</span><span id="sum-sub"></span>
+          </div>
+          <div class="sum-row"><span>Shipping</span><span>Free</span></div>
+          <div class="sum-row sum-total">
+            <span>Total</span><strong id="sum-total"></strong>
+          </div>
+          <button class="btn btn-lime" id="checkout">
+            Proceed to Checkout
+          </button>
+          <p class="sum-note" id="checkout-note" hidden>
+            This is a demo store, so checkout is not connected yet.
+          </p>
+          <a class="btn-link" href="/#shop">Continue Shopping</a>
+        </aside>
+      </div>
+    </main>
+
+    <script type="module" src="/src/cart-page.ts"></script>
+  </body>
+</html>
